@@ -1,837 +1,670 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>For Miss Professor 🌻</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
-  <style>
-    * {
-      box-sizing: border-box;
-      user-select: none;
-      -webkit-tap-highlight-color: transparent;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>For Miss Professor 🌻</title>
 
-    html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      min-height: 100vh;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      color: #38272b;
-      background: #0f0a10;
-      overflow-x: hidden;
-    }
+<style>
+/* ==========================================
+   RESET & GLOBAL STYLES
+========================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-    /* Elegant Font Families */
-    .font-serif-title {
-      font-family: 'Cinzel', serif;
-    }
-    .font-handwriting {
-      font-family: 'Caveat', cursive;
-    }
+html, body {
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  font-family: Georgia, "Times New Roman", serif;
+  color: #3c3038;
+  background-color: #faf6f0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
 
-    /* Background Ambient Glow */
-    #bg {
-      position: fixed;
-      inset: 0;
-      z-index: -10;
-      background: 
-        radial-gradient(circle at 20% 20%, rgba(255, 215, 130, 0.25) 0, transparent 40%),
-        radial-gradient(circle at 80% 30%, rgba(245, 200, 220, 0.22) 0, transparent 45%),
-        radial-gradient(circle at 50% 85%, rgba(220, 190, 255, 0.18) 0, transparent 50%),
-        linear-gradient(135deg, #181017 0%, #291823 50%, #150f17 100%);
-    }
+/* Base Light Ambient Background */
+#bg {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  background: 
+    radial-gradient(circle at 15% 15%, #fff0b9 0%, transparent 28%),
+    radial-gradient(circle at 85% 25%, #fceaf3 0%, transparent 30%),
+    linear-gradient(145deg, #faf6f0, #f6e8ef 50%, #eff5eb);
+}
 
-    /* Ambient Floating Sparkles */
-    .sparkle {
-      position: fixed;
-      border-radius: 50%;
-      background: radial-gradient(circle, #fff7d6 0%, rgba(255,215,0,0) 70%);
-      pointer-events: none;
-      animation: floatSparkle linear infinite;
-    }
+/* Petals Falling Container */
+#flowers {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 20;
+}
 
-    @keyframes floatSparkle {
-      0% { transform: translateY(0) scale(0.6); opacity: 0; }
-      50% { opacity: 0.8; }
-      100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
-    }
+.petal {
+  position: absolute;
+  top: -50px;
+  animation: fall linear forwards;
+  filter: drop-shadow(0 4px 6px rgba(75, 52, 64, 0.08));
+  user-select: none;
+}
 
-    /* Falling Petals Canvas / Layer */
-    #flowers {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-      z-index: 20;
-    }
+@keyframes fall {
+  to {
+    transform: translate3d(60px, 115vh, 0) rotate(420deg);
+  }
+}
 
-    .petal {
-      position: absolute;
-      top: -50px;
-      animation: fall linear forwards;
-      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
-      will-change: transform;
-    }
+/* Canvas Confetti */
+#confetti {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 30;
+}
 
-    @keyframes fall {
-      0% {
-        transform: translate3d(0, 0, 0) rotate(0deg);
-        opacity: 0.95;
-      }
-      100% {
-        transform: translate3d(80px, 105vh, 0) rotate(540deg);
-        opacity: 0.2;
-      }
-    }
+/* ==========================================
+   SCREEN CONTAINER & CARD UNIFICATION
+========================================== */
+.screen {
+  min-height: 100vh;
+  width: 100%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 16px;
+}
 
-    /* UNIFIED SINGLE CARD FRAME - FIXED RESPONSIVE SIZING */
-    .unified-card {
-      width: min(640px, 92vw);
-      min-height: 520px;
-      max-height: 88vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-      padding: 32px 20px;
-      background: rgba(255, 255, 255, 0.88);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.95);
-      box-shadow: 
-        0 25px 70px rgba(0, 0, 0, 0.4),
-        inset 0 0 20px rgba(255, 255, 255, 0.7);
-      border-radius: 32px;
-      position: relative;
-      overflow-y: auto;
-      overflow-x: hidden;
-      /* Mobile Text Wrap Safeguards */
-      word-wrap: break-word;
-      overflow-wrap: break-word;
-      hyphens: auto;
-    }
+.screen.active {
+  display: flex;
+  animation: appear 0.65s ease-out;
+}
 
-    @media (max-width: 480px) {
-      .unified-card {
-        padding: 24px 16px;
-        min-height: 480px;
-        border-radius: 26px;
-      }
-    }
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-    .unified-card::before {
-      content: "";
-      position: absolute;
-      inset: 10px;
-      border: 1px dashed rgba(197, 155, 78, 0.4);
-      border-radius: 24px;
-      pointer-events: none;
-    }
+/* Standardized Card Container Across All Pages */
+.card {
+  width: min(650px, 100%);
+  padding: clamp(32px, 6vw, 48px) clamp(20px, 5vw, 32px);
+  text-align: center;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 20px 50px rgba(86, 59, 76, 0.08);
+  border-radius: 28px;
+  position: relative;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
 
-    /* Screen Transitions */
-    .screen {
-      display: none;
-      min-height: 100vh;
-      align-items: center;
-      justify-content: center;
-      padding: 16px 8px;
-    }
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(215, 184, 106, 0.3);
+  border-radius: 22px;
+  pointer-events: none;
+}
 
-    .screen.active {
-      display: flex;
-      animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
+/* Typography & Layout */
+.tag {
+  font-family: Arial, sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #a48448;
+  margin-bottom: 4px;
+}
 
-    @keyframes slideUpFade {
-      from {
-        opacity: 0;
-        transform: translateY(20px) scale(0.98);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
+.flowers-row {
+  font-size: clamp(28px, 6vw, 36px);
+  letter-spacing: 6px;
+  margin: 12px 0;
+  user-select: none;
+}
 
-    /* Custom Golden Gradient Text */
-    .gold-gradient-text {
-      background: linear-gradient(135deg, #b8860b 0%, #d4af37 45%, #aa771c 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+h1 {
+  font-size: clamp(32px, 8vw, 56px);
+  line-height: 1.1;
+  font-weight: 400;
+  margin: 14px 0 10px;
+  color: #3c3038;
+}
 
-    /* Buttons Styling */
-    .btn-gold {
-      background: linear-gradient(135deg, #2d2229 0%, #45313d 100%);
-      color: #fce8cd;
-      border: 1px solid rgba(212, 175, 55, 0.5);
-      transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
-    }
+h2 {
+  font-size: clamp(26px, 6.5vw, 42px);
+  line-height: 1.15;
+  font-weight: 400;
+  margin: 14px 0 10px;
+  color: #3c3038;
+}
 
-    .btn-gold:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 28px rgba(212, 175, 55, 0.35);
-      border-color: rgba(212, 175, 55, 0.9);
-      background: linear-gradient(135deg, #3d2b37 0%, #583f4f 100%);
-    }
+.gold {
+  color: #bd8821;
+}
 
-    .btn-gold:active {
-      transform: translateY(1px);
-    }
+p {
+  font-size: clamp(16px, 4.5vw, 19px);
+  line-height: 1.6;
+  max-width: 520px;
+  margin: 10px auto;
+  color: #4a3d46;
+}
 
-    /* Gift Box Custom Interactive Styling */
-    .gift-wrap {
-      width: 140px;
-      height: 130px;
-      position: relative;
-      cursor: pointer;
-      margin: 12px auto;
-      transition: transform 0.3s ease;
-    }
+.btn {
+  border: none;
+  border-radius: 30px;
+  padding: 13px 28px;
+  margin-top: 20px;
+  background: #3c3038;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 15px;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 8px 20px rgba(60, 48, 56, 0.15);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  touch-action: manipulation;
+}
 
-    .gift-wrap:hover {
-      transform: scale(1.04);
-    }
+.btn:active {
+  transform: scale(0.98);
+}
 
-    .box-body {
-      position: absolute;
-      left: 20px;
-      bottom: 0;
-      width: 100px;
-      height: 78px;
-      background: linear-gradient(135deg, #d4af37 0%, #aa7a1e 100%);
-      border-radius: 10px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.22);
-    }
+@media (hover: hover) {
+  .btn:hover {
+    transform: translateY(-2px);
+    background: #2a2127;
+  }
+}
 
-    .box-body::before {
-      content: "";
-      position: absolute;
-      left: 40px;
-      top: 0;
-      width: 20px;
-      height: 100%;
-      background: linear-gradient(135deg, #fff3cd 0%, #ffe082 100%);
-    }
+/* Timeline Components */
+.timeline {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin: 22px 0 16px;
+}
 
-    .box-lid {
-      position: absolute;
-      left: 13px;
-      top: 28px;
-      width: 114px;
-      height: 28px;
-      background: linear-gradient(135deg, #e5be48 0%, #b8860b 100%);
-      border-radius: 6px;
-      z-index: 2;
-      transition: transform 0.55s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    }
+.dot {
+  width: 11px;
+  height: 11px;
+  background: #d4a13b;
+  border-radius: 50%;
+  box-shadow: 0 0 0 5px rgba(212, 161, 59, 0.15);
+}
 
-    .box-lid::after {
-      content: "";
-      position: absolute;
-      left: 47px;
-      width: 20px;
-      height: 28px;
-      background: linear-gradient(135deg, #fff3cd 0%, #ffe082 100%);
-    }
+.line {
+  width: clamp(40px, 12vw, 80px);
+  height: 1px;
+  background: rgba(212, 161, 59, 0.35);
+}
 
-    .gift-wrap.open .box-lid {
-      transform: translateY(-55px) rotate(-14deg);
-    }
+.small {
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  color: #897780;
+}
 
-    .bow {
-      position: absolute;
-      z-index: 3;
-      top: 6px;
-      left: 54px;
-      width: 30px;
-      height: 24px;
-      border: 7px solid #ffe082;
-      border-radius: 50%;
-      transform: rotate(25deg);
-    }
+/* Note Callout */
+.note {
+  margin: 20px auto 6px;
+  padding: 18px 20px;
+  max-width: 520px;
+  border-left: 3px solid #d5a744;
+  background: rgba(255, 248, 223, 0.7);
+  text-align: left;
+  font-size: clamp(15px, 4vw, 18px);
+  line-height: 1.6;
+  border-radius: 0 12px 12px 0;
+}
 
-    .bow.two {
-      transform: scaleX(-1) rotate(25deg);
-    }
+/* ==========================================
+   GIFT & CARTOON ANIMATIONS
+========================================== */
+.gift-wrap {
+  margin: 20px auto 0;
+  width: 150px;
+  height: 130px;
+  position: relative;
+  cursor: pointer;
+  touch-action: manipulation;
+}
 
-    /* Cute Dancing Cartoons Stage */
-    .cartoon-stage {
-      display: none;
-      opacity: 0;
-    }
+.box {
+  position: absolute;
+  left: 20px;
+  bottom: 0;
+  width: 110px;
+  height: 80px;
+  background: #d5a04a;
+  border-radius: 6px;
+}
 
-    .cartoon-stage.active {
-      display: flex;
-      opacity: 1;
-      animation: bounceIn 0.7s ease forwards;
-    }
+.box::before {
+  content: "";
+  position: absolute;
+  left: 44px;
+  top: 0;
+  width: 22px;
+  height: 100%;
+  background: #f8df94;
+}
 
-    @keyframes bounceIn {
-      0% { transform: scale(0.4); opacity: 0; }
-      60% { transform: scale(1.04); }
-      100% { transform: scale(1); opacity: 1; }
-    }
+.lid {
+  position: absolute;
+  left: 12px;
+  top: 26px;
+  width: 126px;
+  height: 28px;
+  background: #c78d37;
+  border-radius: 5px;
+  z-index: 2;
+  transition: transform 0.45s ease;
+}
 
-    .dancing-cartoon {
-      animation: danceAnim 0.55s ease-in-out infinite alternate;
-      filter: drop-shadow(0 8px 12px rgba(0,0,0,0.15));
-    }
+.lid::after {
+  content: "";
+  position: absolute;
+  left: 52px;
+  width: 22px;
+  height: 28px;
+  background: #f8df94;
+}
 
-    .dancing-cartoon-alt {
-      animation: danceAnimAlt 0.55s ease-in-out infinite alternate;
-      animation-delay: 0.15s;
-      filter: drop-shadow(0 8px 12px rgba(0,0,0,0.15));
-    }
+.gift-wrap.open .lid {
+  transform: translateY(-38px) rotate(-5deg);
+}
 
-    @keyframes danceAnim {
-      0% { transform: translateY(0) rotate(-7deg); }
-      100% { transform: translateY(-14px) rotate(7deg) scale(1.06); }
-    }
+.bow {
+  position: absolute;
+  z-index: 3;
+  top: 8px;
+  left: 60px;
+  width: 30px;
+  height: 24px;
+  border: 7px solid #f8df94;
+  border-radius: 50%;
+  transform: rotate(25deg);
+}
 
-    @keyframes danceAnimAlt {
-      0% { transform: translateY(-12px) rotate(7deg) scale(1.04); }
-      100% { transform: translateY(0) rotate(-7deg); }
-    }
+.bow.two {
+  transform: scaleX(-1) rotate(25deg);
+}
 
-    /* Confetti Canvas */
-    #confetti {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 40;
-    }
-  </style>
+#giftText {
+  display: none;
+}
+
+#giftText.show {
+  display: block;
+  animation: appear 0.65s ease;
+}
+
+/* Cartoon Celebration Scene */
+.cartoon-party {
+  display: none;
+  position: relative;
+  margin: 16px auto 0;
+  min-height: 160px;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.cartoon-party.show {
+  display: flex;
+  animation: cartoonIn 0.65s ease;
+}
+
+@keyframes cartoonIn {
+  from {
+    opacity: 0;
+    transform: scale(0.7) translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.cartoon {
+  font-size: clamp(54px, 14vw, 76px);
+  animation: dance 0.55s ease-in-out infinite alternate;
+  filter: drop-shadow(0 6px 6px rgba(59, 48, 53, 0.12));
+  user-select: none;
+}
+
+@keyframes dance {
+  from { transform: rotate(-8deg) translateY(2px); }
+  to { transform: rotate(8deg) translateY(-10px); }
+}
+
+.board {
+  background: #fffdf5;
+  border: 3px solid #d5a044;
+  border-radius: 14px;
+  padding: 12px 18px;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  font-size: clamp(13px, 3.8vw, 17px);
+  letter-spacing: 0.5px;
+  color: #bd6b72;
+  box-shadow: 0 8px 20px rgba(76, 53, 64, 0.12);
+  transform: rotate(2deg);
+  animation: boardBob 0.7s ease-in-out infinite alternate;
+}
+
+@keyframes boardBob {
+  to { transform: rotate(-2deg) translateY(-4px); }
+}
+
+.party-item {
+  position: absolute;
+  font-size: 22px;
+  animation: pop 1.2s ease-out forwards;
+}
+
+@keyframes pop {
+  0% { opacity: 0; transform: scale(0.2); }
+  30% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-70px) rotate(140deg); }
+}
+
+.signature {
+  font-style: italic;
+  color: #78616d;
+  margin-top: 20px;
+  font-size: clamp(14px, 3.8vw, 16px);
+}
+</style>
 </head>
 
-<body onclick="initAudioContext()" ontouchstart="initAudioContext()">
+<body onclick="ensureAudioPlaying()">
 
-  <div id="bg"></div>
-  <div id="flowers"></div>
-  <canvas id="confetti"></canvas>
+<div id="bg"></div>
+<div id="flowers"></div>
+<canvas id="confetti"></canvas>
 
-  <main class="w-full max-w-xl mx-auto relative z-10 my-auto">
+<!-- BACKGROUND AUDIO -->
+<audio id="bgSong" loop preload="auto">
+  <source src="Chhoti Si Pyarisi Nanhisi Male Anari 320 Kbps.mp3" type="audio/mpeg">
+</audio>
 
-    <!-- PAGE 1: WELCOME SCREEN -->
-    <section class="screen active" id="s1">
-      <div class="unified-card text-center my-auto">
-        
-        <div class="inline-block px-3.5 py-1 rounded-full bg-amber-100/70 border border-amber-300/60 mt-1">
-          <span class="text-[11px] font-bold tracking-widest uppercase text-amber-900">A special message for you</span>
-        </div>
+<!-- PAGE 1: Intro -->
+<section class="screen active" id="s1">
+  <div class="card">
+    <div class="tag">A message from an old friend</div>
+    <div class="flowers-row">🌻 ✨ 🌼</div>
+    <h1>Happy Birthday,<br><span class="gold">Miss Professor</span></h1>
+    <p>Some friendships don't need daily conversations to stay special.</p>
+    <button class="btn" onclick="go(2)">Start the little surprise →</button>
+  </div>
+</section>
 
-        <div class="text-3xl sm:text-4xl space-x-2 my-2 animate-pulse">
-          🌻 ✨ 🌼
-        </div>
+<!-- PAGE 2: Timeline -->
+<section class="screen" id="s2">
+  <div class="card">
+    <div class="tag">Since 10th class</div>
+    <div class="timeline">
+      <span class="dot"></span>
+      <span class="line"></span>
+      <span class="small">10th Class</span>
+      <span class="line"></span>
+      <span class="dot"></span>
+      <span class="small">Today</span>
+    </div>
+    <div class="flowers-row">📚 🌸</div>
+    <h2>I've known you since day one.</h2>
+    <p>From our 10th-class days to today, it's been a long journey.</p>
+    <p>We may not talk much, but some people are still worth remembering.</p>
+    <button class="btn" onclick="go(3)">Next →</button>
+  </div>
+</section>
 
-        <div class="my-auto py-2">
-          <h1 class="font-serif-title text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-amber-950 leading-tight">
-            Happy Birthday,<br>
-            <span class="gold-gradient-text">Miss Professor</span>
-          </h1>
+<!-- PAGE 3: Appreciation -->
+<section class="screen" id="s3">
+  <div class="card">
+    <div class="tag">Something I've always noticed</div>
+    <div class="flowers-row">🌻 🧠 ✨</div>
+    <h2>Beauty with a brain.</h2>
+    <p>I knew you were smart back then.</p>
+    <p>Now I can see just how brilliantly your mind works.</p>
+    <div class="note">
+      “Beautiful, intelligent, and always becoming better — that's something worth appreciating.”
+    </div>
+    <button class="btn" onclick="go(4)">One more →</button>
+  </div>
+</section>
 
-          <p class="text-base sm:text-lg text-neutral-700 max-w-sm mx-auto leading-relaxed mt-3">
-            Some friendships don't need daily conversations to stay special.
-          </p>
-        </div>
+<!-- PAGE 4: Best Wishes -->
+<section class="screen" id="s4">
+  <div class="card">
+    <div class="tag">A simple wish</div>
+    <div class="flowers-row">🌷 🌼 🌷</div>
+    <h2>For your future</h2>
+    <p>I genuinely wish you the very best — happiness, success, and a wonderful career.</p>
+    <p>Keep growing, keep smiling, and keep doing amazing things.</p>
+    <button class="btn" onclick="go(5)">There's one last thing →</button>
+  </div>
+</section>
 
-        <button class="btn-gold font-medium px-7 py-3.5 rounded-full text-sm sm:text-base mb-1 inline-flex items-center gap-2 group cursor-pointer" onclick="go(2)">
-          <span>Start the little surprise</span>
-          <span class="group-hover:translate-x-1 transition-transform">→</span>
-        </button>
+<!-- PAGE 5: Interactive Gift -->
+<section class="screen" id="s5">
+  <div class="card">
+    <div class="flowers-row">🌻 🎁 🌻</div>
+    <h2>Something is waiting...</h2>
+    <p>Go on. Open it. 😊</p>
 
+    <div class="gift-wrap" id="gift" onclick="openGift()">
+      <div class="lid">
+        <i class="bow"></i>
+        <i class="bow two"></i>
       </div>
-    </section>
+      <div class="box"></div>
+    </div>
 
-    <!-- PAGE 2: TIMELINE & MEMORIES -->
-    <section class="screen" id="s2">
-      <div class="unified-card text-center my-auto">
-        
-        <div class="inline-block px-3.5 py-1 rounded-full bg-amber-100/70 border border-amber-300/60 mt-1">
-          <span class="text-[11px] font-bold tracking-widest uppercase text-amber-900">Since 10th Class</span>
-        </div>
+    <div id="giftText">
+      <p><b>Keep this one:</b><br>Stay happy. Keep that smile. Keep growing.</p>
+    </div>
 
-        <!-- Timeline Graphic -->
-        <div class="flex items-center justify-center gap-2 my-3">
-          <div class="w-3 h-3 rounded-full bg-amber-500 shadow-md shadow-amber-500/50"></div>
-          <div class="w-12 sm:w-20 h-0.5 bg-gradient-to-r from-amber-400 to-amber-300"></div>
-          <span class="text-[11px] font-semibold tracking-wider text-amber-800 bg-amber-100/90 px-2.5 py-0.5 rounded-full border border-amber-200">10th Class</span>
-          <div class="w-12 sm:w-20 h-0.5 bg-gradient-to-r from-amber-300 to-amber-500"></div>
-          <div class="w-3 h-3 rounded-full bg-amber-500 shadow-md shadow-amber-500/50"></div>
-        </div>
-
-        <div class="text-3xl my-1">
-          📚 🌸
-        </div>
-
-        <div class="my-auto py-2">
-          <h2 class="font-serif-title text-2xl sm:text-3xl text-amber-950 font-bold leading-snug">
-            Known you since day one.
-          </h2>
-
-          <p class="text-base sm:text-lg text-neutral-700 max-w-sm mx-auto leading-relaxed mt-3">
-            From our 10th-class days to today, it's been a long journey.
-          </p>
-
-          <p class="text-base sm:text-lg text-neutral-700 max-w-sm mx-auto leading-relaxed mt-2">
-            We may not talk much, but some people are still worth remembering.
-          </p>
-        </div>
-
-        <button class="btn-gold font-medium px-7 py-3 rounded-full text-sm sm:text-base mb-1 inline-flex items-center gap-2 group cursor-pointer" onclick="go(3)">
-          <span>Next →</span>
-        </button>
-
+    <!-- Dancing Cute Cartoons -->
+    <div class="cartoon-party" id="cartoonParty">
+      <span class="cartoon">🧸</span>
+      <span class="cartoon">🐱</span>
+      <div class="board">
+        🎉 HAPPY<br>BIRTHDAY MISS PROFESSOR 🎂
       </div>
-    </section>
+    </div>
 
-    <!-- PAGE 3: BEAUTY WITH BRAIN -->
-    <section class="screen" id="s3">
-      <div class="unified-card text-center my-auto">
-        
-        <div class="inline-block px-3.5 py-1 rounded-full bg-amber-100/70 border border-amber-300/60 mt-1">
-          <span class="text-[11px] font-bold tracking-widest uppercase text-amber-900">Always Noticed</span>
-        </div>
+    <button class="btn" onclick="go(6);burst()">Next page →</button>
+  </div>
+</section>
 
-        <div class="text-3xl my-1">
-          🌻 🧠 ✨
-        </div>
+<!-- PAGE 6: Main Birthday Wish -->
+<section class="screen" id="s6">
+  <div class="card">
+    <div class="tag">Celebration</div>
+    <div class="flowers-row">🌻 🌸 🌼 🌷 🌻</div>
+    <h2>Happppppppppyyyyyyyy<br><span class="gold">Birthday! Simran</span></h2>
+    <p>Wishing you a life full of happiness, success, and beautiful moments.</p>
+    <p>Stay happy, keep that smile on your face, and keep growing in your life.</p>
+    <p class="signature">From an old friend from 10th class 🌻</p>
+    <button class="btn" onclick="go(7)">Final message →</button>
+  </div>
+</section>
 
-        <div class="my-auto py-1">
-          <h2 class="font-serif-title text-2xl sm:text-3xl text-amber-950 font-bold leading-snug">
-            Beauty with a brain.
-          </h2>
+<!-- PAGE 7: Last Page (Sorry Message & Restart) -->
+<section class="screen" id="s7">
+  <div class="card">
+    <div class="tag">A heartfelt note</div>
+    <div class="flowers-row">🌻 ✨ 🌼</div>
+    <h2>Just one last thought...</h2>
+    <p>If I ever said any words that you didn't like, I am truly sorry.</p>
+    <p>My only intention was to bring a smile to your face and make your day special.</p>
+    <p><b class="gold">Again, Happy Birthday, and stay always happy! ✨</b></p>
+    <button class="btn" onclick="restart()">Start Over ↺</button>
+  </div>
+</section>
 
-          <p class="text-base sm:text-lg text-neutral-700 max-w-sm mx-auto leading-relaxed mt-2">
-            I knew you were smart back then.
-          </p>
+<script>
+/* ==========================================
+   AUDIO HANDLING (Auto play start to end)
+========================================== */
+const bgSong = document.getElementById("bgSong");
+let audioStarted = false;
 
-          <p class="text-base sm:text-lg text-neutral-700 max-w-sm mx-auto leading-relaxed mt-1">
-            Now I can see just how brilliantly your mind works.
-          </p>
+function ensureAudioPlaying() {
+  if (!audioStarted && bgSong) {
+    bgSong.volume = 0.85;
+    bgSong.play().then(() => {
+      audioStarted = true;
+    }).catch(() => {
+      // Audio context waiting for interaction
+    });
+  }
+}
 
-          <div class="my-3 p-3.5 rounded-xl bg-gradient-to-r from-amber-100/90 to-amber-50/90 border-l-4 border-amber-500 text-left max-w-sm mx-auto">
-            <p class="font-handwriting text-xl sm:text-2xl text-amber-950 my-0 leading-snug">
-              “Beautiful, intelligent, and always becoming better — that's something worth appreciating.”
-            </p>
-          </div>
-        </div>
+/* ==========================================
+   FALLING PETALS ANIMATION
+========================================== */
+const flowerTypes = ["🌻", "🌼", "🌸", "🌷", "🍃", "✨", "🎊"];
 
-        <button class="btn-gold font-medium px-7 py-3 rounded-full text-sm sm:text-base mb-1 inline-flex items-center gap-2 group cursor-pointer" onclick="go(4)">
-          <span>One more →</span>
-        </button>
+function rain(n = 10) {
+  const container = document.getElementById("flowers");
+  for (let i = 0; i < n; i++) {
+    const p = document.createElement("span");
+    p.className = "petal";
+    p.textContent = flowerTypes[Math.floor(Math.random() * flowerTypes.length)];
+    p.style.left = Math.random() * 100 + "vw";
+    p.style.fontSize = (16 + Math.random() * 22) + "px";
+    p.style.animationDuration = (5 + Math.random() * 5) + "s";
+    p.style.animationDelay = (Math.random() * 1.5) + "s";
+    container.appendChild(p);
+    setTimeout(() => p.remove(), 11000);
+  }
+}
 
-      </div>
-    </section>
+setInterval(() => rain(3), 1800);
+rain(20);
 
-    <!-- PAGE 4: FUTURE WISHES -->
-    <section class="screen" id="s4">
-      <div class="unified-card text-center my-auto">
-        
-        <div class="inline-block px-3.5 py-1 rounded-full bg-amber-100/70 border border-amber-300/60 mt-1">
-          <span class="text-[11px] font-bold tracking-widest uppercase text-amber-900">A Simple Wish</span>
-        </div>
+/* ==========================================
+   PAGE NAVIGATION
+========================================== */
+function go(n) {
+  ensureAudioPlaying();
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+  const target = document.getElementById("s" + n);
+  if (target) {
+    target.classList.add("active");
+  }
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  rain(12);
+}
 
-        <div class="text-3xl my-1">
-          🌷 🌼 🌷
-        </div>
+function restart() {
+  go(1);
+  const gift = document.getElementById("gift");
+  const giftText = document.getElementById("giftText");
+  const cartoonParty = document.getElementById("cartoonParty");
+  if (gift) gift.classList.remove("open");
+  if (giftText) giftText.classList.remove("show");
+  if (cartoonParty) cartoonParty.classList.remove("show");
+}
 
-        <div class="my-auto py-2">
-          <h2 class="font-serif-title text-2xl sm:text-3xl text-amber-950 font-bold leading-snug">
-            For your future
-          </h2>
+/* ==========================================
+   GIFT & CARTOON CELEBRATION
+========================================== */
+function openGift() {
+  ensureAudioPlaying();
+  document.getElementById("gift").classList.add("open");
 
-          <p class="text-base sm:text-lg text-neutral-700 max-w-sm mx-auto leading-relaxed mt-3">
-            I genuinely wish you the very best — happiness, success and a wonderful career.
-          </p>
+  setTimeout(() => {
+    document.getElementById("giftText").classList.add("show");
+    document.getElementById("cartoonParty").classList.add("show");
+    cartoonBurst();
+  }, 400);
 
-          <p class="text-base sm:text-lg text-neutral-700 max-w-sm mx-auto leading-relaxed mt-2">
-            Keep growing, keep smiling, and keep doing amazing things.
-          </p>
-        </div>
+  rain(25);
+  burst();
+}
 
-        <button class="btn-gold font-medium px-7 py-3 rounded-full text-sm sm:text-base mb-1 inline-flex items-center gap-2 group cursor-pointer" onclick="go(5)">
-          <span>There's one last thing →</span>
-        </button>
+function cartoonBurst() {
+  const host = document.getElementById("cartoonParty");
+  const items = ["🌸", "✨", "🌻", "🌼", "🎉", "🌷", "⭐"];
+  items.forEach((item, i) => {
+    const s = document.createElement("span");
+    s.className = "party-item";
+    s.textContent = item;
+    s.style.left = (10 + i * 12) + "%";
+    s.style.top = (60 + (i % 2) * 15) + "%";
+    s.style.animationDelay = (i * 0.08) + "s";
+    host.appendChild(s);
+    setTimeout(() => s.remove(), 1400);
+  });
+}
 
-      </div>
-    </section>
+/* ==========================================
+   CONFETTI CANNON BURST
+========================================== */
+function burst() {
+  const c = document.getElementById("confetti");
+  const ctx = c.getContext("2d");
+  c.width = window.innerWidth;
+  c.height = window.innerHeight;
 
-    <!-- PAGE 5: GIFT SURPRISE & DANCING CARTOONS -->
-    <section class="screen" id="s5">
-      <div class="unified-card text-center my-auto">
-        
-        <div class="inline-block px-3.5 py-1 rounded-full bg-amber-100/70 border border-amber-300/60 mt-1">
-          <span class="text-[11px] font-bold tracking-widest uppercase text-amber-900">Final Surprise</span>
-        </div>
+  const bits = Array.from({ length: 70 }, () => ({
+    x: innerWidth / 2,
+    y: innerHeight / 2,
+    vx: (Math.random() - 0.5) * 10,
+    vy: (Math.random() - 0.7) * 10,
+    r: 2 + Math.random() * 4,
+    color: ["#bd8821", "#d5a04a", "#e89ba0", "#84b59c"][Math.floor(Math.random() * 4)],
+    life: 60 + Math.random() * 30
+  }));
 
-        <h2 class="font-serif-title text-2xl sm:text-3xl text-amber-950 font-bold my-1 leading-snug">
-          Something is waiting...
-        </h2>
+  function frame() {
+    ctx.clearRect(0, 0, c.width, c.height);
+    bits.forEach(b => {
+      if (b.life <= 0) return;
+      b.x += b.vx;
+      b.y += b.vy;
+      b.vy += 0.15;
+      b.life--;
+      ctx.globalAlpha = b.life / 90;
+      ctx.fillStyle = b.color;
+      ctx.beginPath();
+      ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+      ctx.fill();
+    });
 
-        <p class="text-sm sm:text-base text-neutral-600">
-          Tap the gift to open! 😊
-        </p>
-
-        <!-- GIFT BOX INTERACTIVE -->
-        <div class="gift-wrap" id="giftBox" onclick="openGift()">
-          <div class="box-lid">
-            <div class="bow"></div>
-            <div class="bow two"></div>
-          </div>
-          <div class="box-body"></div>
-        </div>
-
-        <!-- REVEALED CONTENT WITH DANCING HAPPY CARTOONS -->
-        <div id="giftRevealed" class="hidden my-2 w-full">
-          
-          <div class="p-3 rounded-xl bg-amber-50/90 border border-amber-200/80 max-w-sm mx-auto mb-3">
-            <p class="text-sm font-semibold text-amber-950">
-              <b>Keep this one:</b>
-            </p>
-            <p class="text-neutral-700 text-xs sm:text-sm mt-0.5">
-              Stay happy. Keep that smile. Keep growing.
-            </p>
-          </div>
-
-          <!-- DANCING CUTE CARTOON PARTY STAGE -->
-          <div id="cartoonStage" class="cartoon-stage flex-row items-center justify-center gap-2 sm:gap-4 bg-gradient-to-r from-amber-100/80 via-pink-100/70 to-purple-100/80 p-3 sm:p-4 rounded-2xl border border-white/80 shadow-sm my-3 max-w-sm mx-auto">
-            
-            <!-- Cartoon 1: Dancing Panda -->
-            <div class="dancing-cartoon flex flex-col items-center shrink-0">
-              <svg class="w-14 h-14 sm:w-16 sm:h-16" viewBox="0 0 100 100">
-                <circle cx="28" cy="28" r="14" fill="#2d2d2d" />
-                <circle cx="72" cy="28" r="14" fill="#2d2d2d" />
-                <circle cx="50" cy="52" r="34" fill="#ffffff" stroke="#2d2d2d" stroke-width="2.5" />
-                <ellipse cx="37" cy="48" rx="9" ry="12" fill="#2d2d2d" transform="rotate(-15 37 48)" />
-                <ellipse cx="63" cy="48" rx="9" ry="12" fill="#2d2d2d" transform="rotate(15 63 48)" />
-                <circle cx="39" cy="46" r="3" fill="#ffffff" />
-                <circle cx="61" cy="46" r="3" fill="#ffffff" />
-                <circle cx="30" cy="58" r="5" fill="#ffb6c1" opacity="0.8" />
-                <circle cx="70" cy="58" r="5" fill="#ffb6c1" opacity="0.8" />
-                <ellipse cx="50" cy="55" rx="4" ry="3" fill="#2d2d2d" />
-                <path d="M 46 62 Q 50 67 54 62" fill="none" stroke="#2d2d2d" stroke-width="2" stroke-linecap="round" />
-                <polygon points="50,8 38,28 62,28" fill="#ffd700" stroke="#ff9800" stroke-width="1.5" />
-                <circle cx="50" cy="6" r="3.5" fill="#e67e22" />
-              </svg>
-              <span class="text-[10px] font-bold text-amber-900 bg-white/80 px-1.5 py-0.5 rounded-full mt-0.5">Panda 🐼</span>
-            </div>
-
-            <!-- Party Badge Banner -->
-            <div class="bg-white/90 border border-amber-300 text-amber-900 rounded-xl p-2 shadow-sm text-center">
-              <span class="block font-serif-title font-bold text-xs text-amber-700">🎉 HAPPY 🎉</span>
-              <span class="block font-handwriting text-lg font-bold text-amber-900 leading-tight">BIRTHDAY!</span>
-            </div>
-
-            <!-- Cartoon 2: Dancing Happy Bunny -->
-            <div class="dancing-cartoon-alt flex flex-col items-center shrink-0">
-              <svg class="w-14 h-14 sm:w-16 sm:h-16" viewBox="0 0 100 100">
-                <ellipse cx="38" cy="22" rx="7" ry="20" fill="#ffffff" stroke="#2d2d2d" stroke-width="2" transform="rotate(-10 38 22)" />
-                <ellipse cx="38" cy="22" rx="4" ry="14" fill="#ffb6c1" transform="rotate(-10 38 22)" />
-                <ellipse cx="62" cy="22" rx="7" ry="20" fill="#ffffff" stroke="#2d2d2d" stroke-width="2" transform="rotate(10 62 22)" />
-                <ellipse cx="62" cy="22" rx="4" ry="14" fill="#ffb6c1" transform="rotate(10 62 22)" />
-                <circle cx="50" cy="56" r="30" fill="#ffffff" stroke="#2d2d2d" stroke-width="2.5" />
-                <circle cx="38" cy="52" r="3.5" fill="#2d2d2d" />
-                <circle cx="62" cy="52" r="3.5" fill="#2d2d2d" />
-                <circle cx="39.5" cy="50.5" r="1.2" fill="#ffffff" />
-                <circle cx="63.5" cy="50.5" r="1.2" fill="#ffffff" />
-                <circle cx="32" cy="60" r="5" fill="#ff80ab" opacity="0.7" />
-                <circle cx="68" cy="60" r="5" fill="#ff80ab" opacity="0.7" />
-                <polygon points="50,58 47,55 53,55" fill="#ff80ab" />
-                <path d="M 44 63 Q 50 68 56 63" fill="none" stroke="#2d2d2d" stroke-width="2" stroke-linecap="round" />
-              </svg>
-              <span class="text-[10px] font-bold text-amber-900 bg-white/80 px-1.5 py-0.5 rounded-full mt-0.5">Bunny 🐰</span>
-            </div>
-
-          </div>
-
-          <button class="btn-gold font-medium px-7 py-3 rounded-full text-sm sm:text-base mt-1 inline-flex items-center gap-2 group cursor-pointer" onclick="go(6); triggerCelebration()">
-            <span>Next →</span>
-          </button>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- NEW PAGE 6: SINCERE APOLOGY & APPRECIATION -->
-    <section class="screen" id="s6">
-      <div class="unified-card text-center my-auto">
-        
-        <div class="inline-block px-3.5 py-1 rounded-full bg-amber-100/70 border border-amber-300/60 mt-1">
-          <span class="text-[11px] font-bold tracking-widest uppercase text-amber-900">From the Heart</span>
-        </div>
-
-        <div class="text-3xl my-1">
-          🕊️ 🌻 ✨
-        </div>
-
-        <div class="my-auto py-2">
-          <h2 class="font-serif-title text-2xl sm:text-3xl text-amber-950 font-bold leading-snug">
-            A small note
-          </h2>
-
-          <div class="my-3 p-4 rounded-2xl bg-amber-50/90 border border-amber-200/80 shadow-sm text-center max-w-sm mx-auto">
-            <p class="text-base sm:text-lg text-neutral-800 leading-relaxed">
-              If I ever said any words that you didn't like, I am truly sorry.
-            </p>
-            <p class="text-base sm:text-lg text-neutral-800 leading-relaxed mt-2">
-              My only intention was to bring a smile to your face and make your day special.
-            </p>
-          </div>
-
-          <p class="text-base sm:text-lg text-amber-950 font-semibold max-w-sm mx-auto leading-relaxed mt-2">
-            Again, Happy Birthday, and stay always happy! 🌻
-          </p>
-        </div>
-
-        <button class="btn-gold font-medium px-7 py-3 rounded-full text-sm sm:text-base mb-1 inline-flex items-center gap-2 group cursor-pointer" onclick="go(7)">
-          <span>Final page →</span>
-        </button>
-
-      </div>
-    </section>
-
-    <!-- PAGE 7: FINAL CELEBRATION & START OVER -->
-    <section class="screen" id="s7">
-      <div class="unified-card text-center my-auto bg-gradient-to-br from-white/95 via-amber-50/90 to-amber-100/50">
-        
-        <div class="inline-block px-3.5 py-1 rounded-full bg-amber-100/80 border border-amber-300">
-          <span class="text-[11px] font-bold tracking-widest uppercase text-amber-900">And Finally...</span>
-        </div>
-
-        <div class="text-3xl sm:text-4xl my-2 space-x-1">
-          🌻 🌸 🌼 🌷 🌻
-        </div>
-
-        <div class="my-auto py-1">
-          <h2 class="font-serif-title text-2xl sm:text-3xl md:text-4xl font-extrabold text-amber-950 leading-tight">
-            Happppppppppyyyyyy<br>
-            <span class="gold-gradient-text">Birthday! Simran</span>
-          </h2>
-
-          <p class="text-base sm:text-lg text-neutral-800 max-w-sm mx-auto leading-relaxed mt-3">
-            Wishing you a life full of happiness, success and beautiful moments.
-          </p>
-
-          <p class="text-base sm:text-lg text-neutral-800 max-w-sm mx-auto leading-relaxed mt-2">
-            Stay happy, keep that smile on your face, and keep growing in your life.
-          </p>
-
-          <p class="font-handwriting text-xl sm:text-2xl text-amber-900 mt-4 mb-0">
-            From an old friend from 10th class 🌻
-          </p>
-        </div>
-
-        <!-- START OVER BUTTON -->
-        <button class="btn-gold font-medium px-7 py-3 rounded-full text-sm sm:text-base my-2 inline-flex items-center gap-2 group cursor-pointer" onclick="resetAll()">
-          <span>↺ Start Over</span>
-        </button>
-
-      </div>
-    </section>
-
-  </main>
-
-  <script>
-    // Flower Rain
-    const flowerTypes = ["🌻", "🌼", "🌸", "🌷", "✨", "💫", "🎁", "🍃"];
-
-    function createPetal(count = 8) {
-      const container = document.getElementById("flowers");
-      for (let i = 0; i < count; i++) {
-        const petal = document.createElement("span");
-        petal.className = "petal";
-        petal.textContent = flowerTypes[Math.floor(Math.random() * flowerTypes.length)];
-        petal.style.left = Math.random() * 100 + "vw";
-        petal.style.fontSize = (16 + Math.random() * 20) + "px";
-        petal.style.animationDuration = (5 + Math.random() * 5) + "s";
-        petal.style.animationDelay = (Math.random() * 1.5) + "s";
-
-        container.appendChild(petal);
-        setTimeout(() => petal.remove(), 10000);
-      }
+    if (bits.some(b => b.life > 0)) {
+      requestAnimationFrame(frame);
+    } else {
+      ctx.clearRect(0, 0, c.width, c.height);
     }
+  }
+  frame();
+}
+</script>
 
-    // Generate floating background sparkles
-    function createSparkles() {
-      for (let i = 0; i < 20; i++) {
-        const s = document.createElement("div");
-        s.className = "sparkle";
-        const size = Math.random() * 5 + 2;
-        s.style.width = size + "px";
-        s.style.height = size + "px";
-        s.style.left = Math.random() * 100 + "vw";
-        s.style.top = Math.random() * 100 + "vh";
-        s.style.animationDuration = (7 + Math.random() * 8) + "s";
-        s.style.animationDelay = (Math.random() * 4) + "s";
-        document.body.appendChild(s);
-      }
-    }
-
-    setInterval(() => createPetal(2), 1800);
-    createPetal(16);
-    createSparkles();
-
-    // Page Navigation
-    function go(screenNum) {
-      document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
-      const target = document.getElementById("s" + screenNum);
-      if (target) {
-        target.classList.add("active");
-      }
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      createPetal(12);
-      triggerCelebration();
-    }
-
-    // Reset Functionality for "Start Over"
-    function resetAll() {
-      giftOpened = false;
-      const giftBox = document.getElementById("giftBox");
-      if (giftBox) giftBox.classList.remove("open");
-      
-      const giftRevealed = document.getElementById("giftRevealed");
-      if (giftRevealed) giftRevealed.classList.add("hidden");
-
-      const cartoonStage = document.getElementById("cartoonStage");
-      if (cartoonStage) cartoonStage.classList.remove("active");
-
-      go(1);
-    }
-
-    let giftOpened = false;
-    function openGift() {
-      if (giftOpened) return;
-      giftOpened = true;
-
-      const giftBox = document.getElementById("giftBox");
-      giftBox.classList.add("open");
-
-      setTimeout(() => {
-        document.getElementById("giftRevealed").classList.remove("hidden");
-        document.getElementById("cartoonStage").classList.add("active");
-        triggerCelebration();
-        createPetal(25);
-      }, 450);
-    }
-
-    /* CONTINUOUS LOUD BACKGROUND MUSIC LOGIC (WEB AUDIO API) */
-    let audioCtx = null;
-    let isAudioPlaying = false;
-
-    // Harmonious cheerful melody frequencies
-    const melodyNotes = [
-      261.63, 329.63, 392.00, 329.63, 293.66, 349.23, 440.00, 349.23,
-      261.63, 329.63, 392.00, 523.25, 440.00, 392.00, 329.63, 392.00
-    ];
-    let noteIndex = 0;
-
-    function initAudioContext() {
-      if (isAudioPlaying) return;
-
-      try {
-        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-        if (!AudioContextClass) return;
-
-        audioCtx = new AudioContextClass();
-
-        if (audioCtx.state === "suspended") {
-          audioCtx.resume();
-        }
-
-        isAudioPlaying = true;
-        playMelodyLoop();
-      } catch (e) {
-        console.log("Audio Context initialized");
-      }
-    }
-
-    function playMelodyLoop() {
-      if (!isAudioPlaying || !audioCtx) return;
-
-      try {
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-
-        // High warmth & clear volume settings
-        osc.type = "sine";
-        osc.frequency.setValueAtTime(melodyNotes[noteIndex % melodyNotes.length], audioCtx.currentTime);
-
-        noteIndex++;
-
-        // Increased gain for noticeably higher volume (0.12 gain level)
-        gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.12, audioCtx.currentTime + 0.05);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.55);
-
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.6);
-
-        setTimeout(playMelodyLoop, 600);
-      } catch (e) {
-        setTimeout(playMelodyLoop, 800);
-      }
-    }
-
-    /* CONFETTI BURST ANIMATION */
-    function triggerCelebration() {
-      const canvas = document.getElementById("confetti");
-      const ctx = canvas.getContext("2d");
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-
-      const particles = Array.from({ length: 80 }, () => ({
-        x: canvas.width / 2,
-        y: canvas.height / 2,
-        vx: (Math.random() - 0.5) * 10,
-        vy: (Math.random() - 0.7) * 10,
-        size: 3 + Math.random() * 4,
-        color: `hsl(${Math.random() * 50 + 35}, 90%, 60%)`,
-        life: 70 + Math.random() * 35
-      }));
-
-      function renderFrame() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        let activeCount = 0;
-        particles.forEach(p => {
-          if (p.life <= 0) return;
-          activeCount++;
-
-          p.x += p.vx;
-          p.y += p.vy;
-          p.vy += 0.14; // Gravity
-          p.life--;
-
-          ctx.globalAlpha = Math.max(0, p.life / 90);
-          ctx.fillStyle = p.color;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-          ctx.fill();
-        });
-
-        if (activeCount > 0) {
-          requestAnimationFrame(renderFrame);
-        } else {
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-        }
-      }
-
-      renderFrame();
-    }
-  </script>
 </body>
 </html>
