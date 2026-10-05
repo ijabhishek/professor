@@ -3,41 +3,43 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
 <title>For Miss Professor 🌻</title>
 
 <style>
-/* ==========================================
-   RESET & GLOBAL STYLES
-========================================== */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-html, body {
+html,
+body {
   width: 100%;
-  height: 100%;
-  min-height: 100vh;
+  min-height: 100%;
   font-family: Georgia, "Times New Roman", serif;
   color: #3c3038;
-  background-color: #faf6f0;
+  background: #faf6f0;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Base Light Ambient Background */
+/* BACKGROUND */
+
 #bg {
   position: fixed;
   inset: 0;
   z-index: -10;
-  background: 
+  background:
     radial-gradient(circle at 15% 15%, #fff0b9 0%, transparent 28%),
     radial-gradient(circle at 85% 25%, #fceaf3 0%, transparent 30%),
     linear-gradient(145deg, #faf6f0, #f6e8ef 50%, #eff5eb);
 }
 
-/* Petals Falling Container */
+/* FALLING FLOWERS */
+
 #flowers {
   position: fixed;
   inset: 0;
@@ -60,7 +62,8 @@ html, body {
   }
 }
 
-/* Canvas Confetti */
+/* CONFETTI */
+
 #confetti {
   position: fixed;
   inset: 0;
@@ -68,9 +71,8 @@ html, body {
   z-index: 30;
 }
 
-/* ==========================================
-   SCREEN CONTAINER & CARD UNIFICATION
-========================================== */
+/* SCREENS */
+
 .screen {
   min-height: 100vh;
   width: 100%;
@@ -90,13 +92,15 @@ html, body {
     opacity: 0;
     transform: translateY(16px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-/* Standardized Card Container Across All Pages */
+/* CARD */
+
 .card {
   width: min(650px, 100%);
   padding: clamp(32px, 6vw, 48px) clamp(20px, 5vw, 32px);
@@ -122,7 +126,8 @@ html, body {
   pointer-events: none;
 }
 
-/* Typography & Layout */
+/* TYPOGRAPHY */
+
 .tag {
   font-family: Arial, sans-serif;
   font-weight: 600;
@@ -168,6 +173,8 @@ p {
   color: #4a3d46;
 }
 
+/* BUTTON */
+
 .btn {
   border: none;
   border-radius: 30px;
@@ -194,7 +201,8 @@ p {
   }
 }
 
-/* Timeline Components */
+/* TIMELINE */
+
 .timeline {
   display: flex;
   justify-content: center;
@@ -223,7 +231,8 @@ p {
   color: #897780;
 }
 
-/* Note Callout */
+/* NOTE */
+
 .note {
   margin: 20px auto 6px;
   padding: 18px 20px;
@@ -236,9 +245,8 @@ p {
   border-radius: 0 12px 12px 0;
 }
 
-/* ==========================================
-   GIFT & CARTOON ANIMATIONS
-========================================== */
+/* GIFT */
+
 .gift-wrap {
   margin: 20px auto 0;
   width: 150px;
@@ -318,7 +326,8 @@ p {
   animation: appear 0.65s ease;
 }
 
-/* Cartoon Celebration Scene */
+/* CARTOON PARTY */
+
 .cartoon-party {
   display: none;
   position: relative;
@@ -340,6 +349,7 @@ p {
     opacity: 0;
     transform: scale(0.7) translateY(15px);
   }
+
   to {
     opacity: 1;
     transform: scale(1) translateY(0);
@@ -354,8 +364,13 @@ p {
 }
 
 @keyframes dance {
-  from { transform: rotate(-8deg) translateY(2px); }
-  to { transform: rotate(8deg) translateY(-10px); }
+  from {
+    transform: rotate(-8deg) translateY(2px);
+  }
+
+  to {
+    transform: rotate(8deg) translateY(-10px);
+  }
 }
 
 .board {
@@ -374,7 +389,9 @@ p {
 }
 
 @keyframes boardBob {
-  to { transform: rotate(-2deg) translateY(-4px); }
+  to {
+    transform: rotate(-2deg) translateY(-4px);
+  }
 }
 
 .party-item {
@@ -384,9 +401,19 @@ p {
 }
 
 @keyframes pop {
-  0% { opacity: 0; transform: scale(0.2); }
-  30% { opacity: 1; }
-  100% { opacity: 0; transform: translateY(-70px) rotate(140deg); }
+  0% {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-70px) rotate(140deg);
+  }
 }
 
 .signature {
@@ -395,275 +422,1025 @@ p {
   margin-top: 20px;
   font-size: clamp(14px, 3.8vw, 16px);
 }
+
+/* MUSIC BUTTON */
+
+.music-control {
+  position: fixed;
+  right: 15px;
+  bottom: 15px;
+  z-index: 100;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(60, 48, 56, 0.9);
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.music-control.playing {
+  animation: musicPulse 1.2s infinite;
+}
+
+@keyframes musicPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 500px) {
+
+  .timeline {
+    gap: 7px;
+  }
+
+  .line {
+    width: 28px;
+  }
+
+  .card {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .music-control {
+    right: 12px;
+    bottom: 12px;
+  }
+}
 </style>
 </head>
 
-<body onclick="ensureAudioPlaying()">
+<body>
 
+<!-- BACKGROUND -->
 <div id="bg"></div>
+
+<!-- FALLING FLOWERS -->
 <div id="flowers"></div>
+
+<!-- CONFETTI -->
 <canvas id="confetti"></canvas>
 
-<!-- BACKGROUND AUDIO -->
-<audio id="bgSong" loop preload="auto">
-  <source src="song.mp3" type="audio/mpeg">
+<!-- ==========================================
+     MUSIC
+     
+     IMPORTANT:
+     Put song.mp3 in the SAME folder
+     as this HTML file.
+========================================== -->
+
+<audio id="bgSong" loop preload="auto" playsinline>
+  <source src="./song.mp3" type="audio/mpeg">
 </audio>
 
-<!-- PAGE 1: Intro -->
+<!-- MUSIC BUTTON -->
+<button
+  id="musicControl"
+  class="music-control"
+  onclick="toggleMusic(event)"
+  aria-label="Play or pause music">
+  🔇
+</button>
+
+
+<!-- ==========================================
+     PAGE 1
+========================================== -->
+
 <section class="screen active" id="s1">
+
   <div class="card">
-    <div class="tag">A message from an old friend</div>
-    <div class="flowers-row">🌻 ✨ 🌼</div>
-    <h1>Happy Birthday,<br><span class="gold">Miss Professor</span></h1>
-    <p>Some friendships don't need daily conversations to stay special.</p>
-    <button class="btn" onclick="go(2)">Start the little surprise →</button>
+
+    <div class="tag">
+      A message from an old friend
+    </div>
+
+    <div class="flowers-row">
+      🌻 ✨ 🌼
+    </div>
+
+    <h1>
+      Happy Birthday,<br>
+      <span class="gold">Miss Professor</span>
+    </h1>
+
+    <p>
+      Some friendships don't need daily conversations
+      to stay special.
+    </p>
+
+    <button class="btn" onclick="startExperience()">
+      Start the little surprise →
+    </button>
+
   </div>
+
 </section>
 
-<!-- PAGE 2: Timeline -->
+
+<!-- ==========================================
+     PAGE 2
+========================================== -->
+
 <section class="screen" id="s2">
+
   <div class="card">
-    <div class="tag">Since 10th class</div>
+
+    <div class="tag">
+      Since 10th class
+    </div>
+
     <div class="timeline">
+
       <span class="dot"></span>
+
       <span class="line"></span>
-      <span class="small">10th Class</span>
+
+      <span class="small">
+        10th Class
+      </span>
+
       <span class="line"></span>
+
       <span class="dot"></span>
-      <span class="small">Today</span>
+
+      <span class="small">
+        Today
+      </span>
+
     </div>
-    <div class="flowers-row">📚 🌸</div>
-    <h2>I've known you since day one.</h2>
-    <p>From our 10th-class days to today, it's been a long journey.</p>
-    <p>We may not talk much, but some people are still worth remembering.</p>
-    <button class="btn" onclick="go(3)">Next →</button>
+
+    <div class="flowers-row">
+      📚 🌸
+    </div>
+
+    <h2>
+      I've known you since day one.
+    </h2>
+
+    <p>
+      From our 10th-class days to today,
+      it's been a long journey.
+    </p>
+
+    <p>
+      We may not talk much, but some people
+      are still worth remembering.
+    </p>
+
+    <button class="btn" onclick="go(3)">
+      Next →
+    </button>
+
   </div>
+
 </section>
 
-<!-- PAGE 3: Appreciation -->
+
+<!-- ==========================================
+     PAGE 3
+========================================== -->
+
 <section class="screen" id="s3">
+
   <div class="card">
-    <div class="tag">Something I've always noticed</div>
-    <div class="flowers-row">🌻 🧠 ✨</div>
-    <h2>Beauty with a brain.</h2>
-    <p>I knew you were smart back then.</p>
-    <p>Now I can see just how brilliantly your mind works.</p>
+
+    <div class="tag">
+      Something I've always noticed
+    </div>
+
+    <div class="flowers-row">
+      🌻 🧠 ✨
+    </div>
+
+    <h2>
+      Beauty with a brain.
+    </h2>
+
+    <p>
+      I knew you were smart back then.
+    </p>
+
+    <p>
+      Now I can see just how brilliantly
+      your mind works.
+    </p>
+
     <div class="note">
-      “Beautiful, intelligent, and always becoming better — that's something worth appreciating.”
+      “Beautiful, intelligent, and always becoming
+      better — that's something worth appreciating.”
     </div>
-    <button class="btn" onclick="go(4)">One more →</button>
+
+    <button class="btn" onclick="go(4)">
+      One more →
+    </button>
+
   </div>
+
 </section>
 
-<!-- PAGE 4: Best Wishes -->
+
+<!-- ==========================================
+     PAGE 4
+========================================== -->
+
 <section class="screen" id="s4">
+
   <div class="card">
-    <div class="tag">A simple wish</div>
-    <div class="flowers-row">🌷 🌼 🌷</div>
-    <h2>For your future</h2>
-    <p>I genuinely wish you the very best — happiness, success, and a wonderful career.</p>
-    <p>Keep growing, keep smiling, and keep doing amazing things.</p>
-    <button class="btn" onclick="go(5)">There's one last thing →</button>
+
+    <div class="tag">
+      A simple wish
+    </div>
+
+    <div class="flowers-row">
+      🌷 🌼 🌷
+    </div>
+
+    <h2>
+      For your future
+    </h2>
+
+    <p>
+      I genuinely wish you the very best —
+      happiness, success, and a wonderful career.
+    </p>
+
+    <p>
+      Keep growing, keep smiling,
+      and keep doing amazing things.
+    </p>
+
+    <button class="btn" onclick="go(5)">
+      There's one last thing →
+    </button>
+
   </div>
+
 </section>
 
-<!-- PAGE 5: Interactive Gift -->
-<section class="screen" id="s5">
-  <div class="card">
-    <div class="flowers-row">🌻 🎁 🌻</div>
-    <h2>Something is waiting...</h2>
-    <p>Go on. Open it. 😊</p>
 
-    <div class="gift-wrap" id="gift" onclick="openGift()">
-      <div class="lid">
-        <i class="bow"></i>
-        <i class="bow two"></i>
-      </div>
-      <div class="box"></div>
+<!-- ==========================================
+     PAGE 5
+========================================== -->
+
+<section class="screen" id="s5">
+
+  <div class="card">
+
+    <div class="flowers-row">
+      🌻 🎁 🌻
     </div>
+
+    <h2>
+      Something is waiting...
+    </h2>
+
+    <p>
+      Go on. Open it. 😊
+    </p>
+
+    <div
+      class="gift-wrap"
+      id="gift"
+      onclick="openGift()">
+
+      <div class="lid">
+
+        <i class="bow"></i>
+
+        <i class="bow two"></i>
+
+      </div>
+
+      <div class="box"></div>
+
+    </div>
+
 
     <div id="giftText">
-      <p><b>Keep this one:</b><br>Stay happy. Keep that smile. Keep growing.</p>
+
+      <p>
+        <b>Keep this one:</b><br>
+        Stay happy. Keep that smile.
+        Keep growing.
+      </p>
+
     </div>
 
-    <!-- Dancing Cute Cartoons -->
-    <div class="cartoon-party" id="cartoonParty">
-      <span class="cartoon">🧸</span>
-      <span class="cartoon">🐱</span>
+
+    <div
+      class="cartoon-party"
+      id="cartoonParty">
+
+      <span class="cartoon">
+        🧸
+      </span>
+
+      <span class="cartoon">
+        🐱
+      </span>
+
       <div class="board">
-        🎉 HAPPY<br>BIRTHDAY MISS PROFESSOR 🎂
+        🎉 HAPPY<br>
+        BIRTHDAY MISS PROFESSOR 🎂
       </div>
+
     </div>
 
-    <button class="btn" onclick="go(6);burst()">Next page →</button>
+
+    <button
+      class="btn"
+      onclick="go(6); burst()">
+
+      Next page →
+
+    </button>
+
   </div>
+
 </section>
 
-<!-- PAGE 6: Main Birthday Wish -->
+
+<!-- ==========================================
+     PAGE 6
+========================================== -->
+
 <section class="screen" id="s6">
+
   <div class="card">
-    <div class="tag">Celebration</div>
-    <div class="flowers-row">🌻 🌸 🌼 🌷 🌻</div>
-    <h2>Happppppppppyyyyyyyy<br><span class="gold">Birthday! Simran</span></h2>
-    <p>Wishing you a life full of happiness, success, and beautiful moments.</p>
-    <p>Stay happy, keep that smile on your face, and keep growing in your life.</p>
-    <p class="signature">From an old friend from 10th class 🌻</p>
-    <button class="btn" onclick="go(7)">Final message →</button>
+
+    <div class="tag">
+      Celebration
+    </div>
+
+    <div class="flowers-row">
+      🌻 🌸 🌼 🌷 🌻
+    </div>
+
+    <h2>
+      Happppppppppyyyyyyyy<br>
+
+      <span class="gold">
+        Birthday! Simran
+      </span>
+
+    </h2>
+
+    <p>
+      Wishing you a life full of happiness,
+      success, and beautiful moments.
+    </p>
+
+    <p>
+      Stay happy, keep that smile on your face,
+      and keep growing in your life.
+    </p>
+
+    <p class="signature">
+      From an old friend from 10th class 🌻
+    </p>
+
+    <button class="btn" onclick="go(7)">
+      Final message →
+    </button>
+
   </div>
+
 </section>
 
-<!-- PAGE 7: Last Page (Sorry Message & Restart) -->
+
+<!-- ==========================================
+     PAGE 7
+========================================== -->
+
 <section class="screen" id="s7">
+
   <div class="card">
-    <div class="tag">A heartfelt note</div>
-    <div class="flowers-row">🌻 ✨ 🌼</div>
-    <h2>Just one last thought...</h2>
-    <p>If I ever said any words that you didn't like, I am truly sorry.</p>
-    <p>My only intention was to bring a smile to your face and make your day special.</p>
-    <p><b class="gold">Again, Happy Birthday, and stay always happy! ✨</b></p>
-    <button class="btn" onclick="restart()">Start Over ↺</button>
+
+    <div class="tag">
+      A heartfelt note
+    </div>
+
+    <div class="flowers-row">
+      🌻 ✨ 🌼
+    </div>
+
+    <h2>
+      Just one last thought...
+    </h2>
+
+    <p>
+      If I ever said any words that you didn't like,
+      I am truly sorry.
+    </p>
+
+    <p>
+      My only intention was to bring a smile to your
+      face and make your day special.
+    </p>
+
+    <p>
+      <b class="gold">
+        Again, Happy Birthday,
+        and stay always happy! ✨
+      </b>
+    </p>
+
+    <button class="btn" onclick="restart()">
+      Start Over ↺
+    </button>
+
   </div>
+
 </section>
+
 
 <script>
-/* ==========================================
-   AUDIO HANDLING (Auto play start to end)
-========================================== */
+
+/* =====================================================
+   MUSIC SYSTEM
+===================================================== */
+
 const bgSong = document.getElementById("bgSong");
+
+const musicControl =
+  document.getElementById("musicControl");
+
 let audioStarted = false;
 
-function ensureAudioPlaying() {
-  if (!audioStarted && bgSong) {
-    bgSong.volume = 0.85;
-    bgSong.play().then(() => {
-      audioStarted = true;
-    }).catch(() => {
-      // Audio context waiting for interaction
-    });
+
+/* START MUSIC */
+
+function startMusic() {
+
+  if (!bgSong) return;
+
+  bgSong.volume = 0.85;
+
+  const playPromise = bgSong.play();
+
+  if (playPromise !== undefined) {
+
+    playPromise
+      .then(() => {
+
+        audioStarted = true;
+
+        musicControl.textContent = "🎵";
+
+        musicControl.classList.add("playing");
+
+      })
+      .catch((error) => {
+
+        console.log(
+          "Audio playback blocked:",
+          error
+        );
+
+        musicControl.textContent = "🔇";
+
+        musicControl.classList.remove(
+          "playing"
+        );
+
+      });
+
   }
+
 }
 
-/* ==========================================
-   FALLING PETALS ANIMATION
-========================================== */
-const flowerTypes = ["🌻", "🌼", "🌸", "🌷", "🍃", "✨", "🎊"];
+
+/* FIRST USER ACTION */
+
+function startExperience() {
+
+  /*
+    The music starts directly from the
+    button click. This is important because
+    mobile browsers block automatic audio.
+  */
+
+  startMusic();
+
+  go(2);
+
+}
+
+
+/* PLAY / PAUSE */
+
+function toggleMusic(event) {
+
+  event.stopPropagation();
+
+  if (!bgSong) return;
+
+  if (bgSong.paused) {
+
+    startMusic();
+
+  } else {
+
+    bgSong.pause();
+
+    musicControl.textContent = "🔇";
+
+    musicControl.classList.remove(
+      "playing"
+    );
+
+  }
+
+}
+
+
+/* AUDIO EVENTS */
+
+bgSong.addEventListener(
+  "pause",
+  () => {
+
+    musicControl.textContent = "🔇";
+
+    musicControl.classList.remove(
+      "playing"
+    );
+
+  }
+);
+
+
+bgSong.addEventListener(
+  "play",
+  () => {
+
+    musicControl.textContent = "🎵";
+
+    musicControl.classList.add(
+      "playing"
+    );
+
+  }
+);
+
+
+/* =====================================================
+   FALLING FLOWERS
+===================================================== */
+
+const flowerTypes = [
+  "🌻",
+  "🌼",
+  "🌸",
+  "🌷",
+  "🍃",
+  "✨",
+  "🎊"
+];
+
 
 function rain(n = 10) {
-  const container = document.getElementById("flowers");
+
+  const container =
+    document.getElementById("flowers");
+
   for (let i = 0; i < n; i++) {
-    const p = document.createElement("span");
+
+    const p =
+      document.createElement("span");
+
     p.className = "petal";
-    p.textContent = flowerTypes[Math.floor(Math.random() * flowerTypes.length)];
-    p.style.left = Math.random() * 100 + "vw";
-    p.style.fontSize = (16 + Math.random() * 22) + "px";
-    p.style.animationDuration = (5 + Math.random() * 5) + "s";
-    p.style.animationDelay = (Math.random() * 1.5) + "s";
+
+    p.textContent =
+      flowerTypes[
+        Math.floor(
+          Math.random() *
+          flowerTypes.length
+        )
+      ];
+
+    p.style.left =
+      Math.random() * 100 + "vw";
+
+    p.style.fontSize =
+      (16 + Math.random() * 22) + "px";
+
+    p.style.animationDuration =
+      (5 + Math.random() * 5) + "s";
+
+    p.style.animationDelay =
+      (Math.random() * 1.5) + "s";
+
     container.appendChild(p);
-    setTimeout(() => p.remove(), 11000);
+
+    setTimeout(() => {
+
+      p.remove();
+
+    }, 11000);
+
   }
+
 }
 
-setInterval(() => rain(3), 1800);
+
+/* CONTINUOUS FLOWERS */
+
+setInterval(() => {
+
+  rain(3);
+
+}, 1800);
+
 rain(20);
 
-/* ==========================================
+
+/* =====================================================
    PAGE NAVIGATION
-========================================== */
+===================================================== */
+
 function go(n) {
-  ensureAudioPlaying();
-  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
-  const target = document.getElementById("s" + n);
-  if (target) {
-    target.classList.add("active");
+
+  /*
+    If music has already started,
+    make sure it remains playing.
+  */
+
+  if (
+    bgSong &&
+    bgSong.paused &&
+    audioStarted
+  ) {
+
+    bgSong.play().catch(() => {});
+
   }
-  window.scrollTo({ top: 0, behavior: "smooth" });
-  rain(12);
-}
 
-function restart() {
-  go(1);
-  const gift = document.getElementById("gift");
-  const giftText = document.getElementById("giftText");
-  const cartoonParty = document.getElementById("cartoonParty");
-  if (gift) gift.classList.remove("open");
-  if (giftText) giftText.classList.remove("show");
-  if (cartoonParty) cartoonParty.classList.remove("show");
-}
 
-/* ==========================================
-   GIFT & CARTOON CELEBRATION
-========================================== */
-function openGift() {
-  ensureAudioPlaying();
-  document.getElementById("gift").classList.add("open");
+  document
+    .querySelectorAll(".screen")
+    .forEach(screen => {
 
-  setTimeout(() => {
-    document.getElementById("giftText").classList.add("show");
-    document.getElementById("cartoonParty").classList.add("show");
-    cartoonBurst();
-  }, 400);
+      screen.classList.remove(
+        "active"
+      );
 
-  rain(25);
-  burst();
-}
-
-function cartoonBurst() {
-  const host = document.getElementById("cartoonParty");
-  const items = ["🌸", "✨", "🌻", "🌼", "🎉", "🌷", "⭐"];
-  items.forEach((item, i) => {
-    const s = document.createElement("span");
-    s.className = "party-item";
-    s.textContent = item;
-    s.style.left = (10 + i * 12) + "%";
-    s.style.top = (60 + (i % 2) * 15) + "%";
-    s.style.animationDelay = (i * 0.08) + "s";
-    host.appendChild(s);
-    setTimeout(() => s.remove(), 1400);
-  });
-}
-
-/* ==========================================
-   CONFETTI CANNON BURST
-========================================== */
-function burst() {
-  const c = document.getElementById("confetti");
-  const ctx = c.getContext("2d");
-  c.width = window.innerWidth;
-  c.height = window.innerHeight;
-
-  const bits = Array.from({ length: 70 }, () => ({
-    x: innerWidth / 2,
-    y: innerHeight / 2,
-    vx: (Math.random() - 0.5) * 10,
-    vy: (Math.random() - 0.7) * 10,
-    r: 2 + Math.random() * 4,
-    color: ["#bd8821", "#d5a04a", "#e89ba0", "#84b59c"][Math.floor(Math.random() * 4)],
-    life: 60 + Math.random() * 30
-  }));
-
-  function frame() {
-    ctx.clearRect(0, 0, c.width, c.height);
-    bits.forEach(b => {
-      if (b.life <= 0) return;
-      b.x += b.vx;
-      b.y += b.vy;
-      b.vy += 0.15;
-      b.life--;
-      ctx.globalAlpha = b.life / 90;
-      ctx.fillStyle = b.color;
-      ctx.beginPath();
-      ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
-      ctx.fill();
     });
 
-    if (bits.some(b => b.life > 0)) {
-      requestAnimationFrame(frame);
-    } else {
-      ctx.clearRect(0, 0, c.width, c.height);
-    }
+
+  const target =
+    document.getElementById(
+      "s" + n
+    );
+
+
+  if (target) {
+
+    target.classList.add(
+      "active"
+    );
+
   }
-  frame();
+
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+
+  rain(12);
+
 }
+
+
+/* =====================================================
+   RESTART
+===================================================== */
+
+function restart() {
+
+  go(1);
+
+
+  const gift =
+    document.getElementById("gift");
+
+  const giftText =
+    document.getElementById("giftText");
+
+  const cartoonParty =
+    document.getElementById(
+      "cartoonParty"
+    );
+
+
+  if (gift) {
+
+    gift.classList.remove(
+      "open"
+    );
+
+  }
+
+
+  if (giftText) {
+
+    giftText.classList.remove(
+      "show"
+    );
+
+  }
+
+
+  if (cartoonParty) {
+
+    cartoonParty.classList.remove(
+      "show"
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   GIFT
+===================================================== */
+
+function openGift() {
+
+  /* Make sure music continues */
+
+  startMusic();
+
+
+  document
+    .getElementById("gift")
+    .classList.add("open");
+
+
+  setTimeout(() => {
+
+    document
+      .getElementById("giftText")
+      .classList.add("show");
+
+
+    document
+      .getElementById("cartoonParty")
+      .classList.add("show");
+
+
+    cartoonBurst();
+
+  }, 400);
+
+
+  rain(25);
+
+  burst();
+
+}
+
+
+/* =====================================================
+   CARTOON BURST
+===================================================== */
+
+function cartoonBurst() {
+
+  const host =
+    document.getElementById(
+      "cartoonParty"
+    );
+
+
+  const items = [
+    "🌸",
+    "✨",
+    "🌻",
+    "🌼",
+    "🎉",
+    "🌷",
+    "⭐"
+  ];
+
+
+  items.forEach((item, i) => {
+
+    const s =
+      document.createElement(
+        "span"
+      );
+
+    s.className =
+      "party-item";
+
+    s.textContent =
+      item;
+
+    s.style.left =
+      (10 + i * 12) + "%";
+
+    s.style.top =
+      (60 + (i % 2) * 15) + "%";
+
+    s.style.animationDelay =
+      (i * 0.08) + "s";
+
+
+    host.appendChild(s);
+
+
+    setTimeout(() => {
+
+      s.remove();
+
+    }, 1400);
+
+  });
+
+}
+
+
+/* =====================================================
+   CONFETTI
+===================================================== */
+
+function burst() {
+
+  const c =
+    document.getElementById(
+      "confetti"
+    );
+
+  const ctx =
+    c.getContext("2d");
+
+
+  c.width =
+    window.innerWidth;
+
+  c.height =
+    window.innerHeight;
+
+
+  const bits =
+    Array.from(
+      { length: 70 },
+      () => ({
+
+        x:
+          innerWidth / 2,
+
+        y:
+          innerHeight / 2,
+
+        vx:
+          (Math.random() - 0.5) * 10,
+
+        vy:
+          (Math.random() - 0.7) * 10,
+
+        r:
+          2 + Math.random() * 4,
+
+        color:
+          [
+            "#bd8821",
+            "#d5a04a",
+            "#e89ba0",
+            "#84b59c"
+          ][
+            Math.floor(
+              Math.random() * 4
+            )
+          ],
+
+        life:
+          60 +
+          Math.random() * 30
+
+      })
+    );
+
+
+  function frame() {
+
+    ctx.clearRect(
+      0,
+      0,
+      c.width,
+      c.height
+    );
+
+
+    bits.forEach(b => {
+
+      if (b.life <= 0) return;
+
+
+      b.x += b.vx;
+
+      b.y += b.vy;
+
+      b.vy += 0.15;
+
+      b.life--;
+
+
+      ctx.globalAlpha =
+        b.life / 90;
+
+      ctx.fillStyle =
+        b.color;
+
+
+      ctx.beginPath();
+
+      ctx.arc(
+        b.x,
+        b.y,
+        b.r,
+        0,
+        Math.PI * 2
+      );
+
+      ctx.fill();
+
+    });
+
+
+    if (
+      bits.some(
+        b => b.life > 0
+      )
+    ) {
+
+      requestAnimationFrame(
+        frame
+      );
+
+    } else {
+
+      ctx.clearRect(
+        0,
+        0,
+        c.width,
+        c.height
+      );
+
+    }
+
+  }
+
+
+  frame();
+
+}
+
+
+/* =====================================================
+   RESIZE
+===================================================== */
+
+window.addEventListener(
+  "resize",
+  () => {
+
+    const c =
+      document.getElementById(
+        "confetti"
+      );
+
+    if (c) {
+
+      c.width =
+        window.innerWidth;
+
+      c.height =
+        window.innerHeight;
+
+    }
+
+  }
+);
+
 </script>
 
 </body>
